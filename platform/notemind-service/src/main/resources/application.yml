@@ -1,0 +1,67 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: notemind-service
+  datasource:
+    # characterEncoding 须为 Java 字符集名（UTF-8）；utf8mb4 会触发 Unsupported character encoding
+    url: jdbc:mysql://127.0.0.1:3306/notemind?useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+  servlet:
+    multipart:
+      max-file-size: 64MB
+      max-request-size: 64MB
+
+# Python AI 引擎（方案 2：业务在 Java，智能能力在 backend）
+notemind:
+  jwt:
+    secret: ${JWT_SECRET:local-dev-only-change-me-32chars!!}
+    expire-seconds: 86400
+  storage:
+    upload-dir: ${NOTEMIND_UPLOAD_DIR:./data/uploads}
+  ai-engine:
+    base-url: ${AI_ENGINE_URL:http://127.0.0.1:8000}
+    token: ${AI_ENGINE_TOKEN:local-dev-ai-engine-token}
+    connect-timeout-ms: 10000
+    read-timeout-ms: 300000
+    # 解析（含 OCR）单独更长超时
+    parse-timeout-ms: 600000
+  # 业务默认值（避免各 Asvc/Dsvc 硬编码种子 ID）
+  defaults:
+    knowledge-base-id: ${NOTEMIND_DEFAULT_KB_ID:kb_default}
+    embedding-model-id: ${NOTEMIND_DEFAULT_EMBED_MODEL_ID:m_emb_v4}
+    chunk-strategy-id: ${NOTEMIND_DEFAULT_CHUNK_STRATEGY_ID:cs_recursive}
+    retrieval-strategy-id: ${NOTEMIND_DEFAULT_RETRIEVAL_STRATEGY_ID:rs_baseline_vector}
+    max-page-size: ${NOTEMIND_MAX_PAGE_SIZE:100}
+    prompt-scenarios:
+      - 问答生成
+      - 查询改写
+      - Agentic RAG
+      - 评测集构建
+      - 效果评测
+    upload-extensions:
+      - pdf
+      - txt
+      - md
+      - markdown
+      - docx
+      - xlsx
+      - pptx
+  # 模型 API Key AES 密钥材料（默认复用 JWT secret）；生产请单独设置 NOTEMIND_API_KEY_SECRET
+  api-key-secret: ${NOTEMIND_API_KEY_SECRET:${JWT_SECRET:local-dev-only-change-me-32chars!!}}
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

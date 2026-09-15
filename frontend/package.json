@@ -1,0 +1,17 @@
+{
+  "name": "notemind-frontend",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev:web": "pnpm --filter @notemind/web dev",
+    "dev:admin": "pnpm --filter @notemind/admin dev",
+    "build:web": "pnpm --filter @notemind/web build",
+    "build:admin": "pnpm --filter @notemind/admin build"
+  },
+  "pnpm": {
+    "overrides": {
+      "pinia": "2.1.7",
+      "vue": "3.4.21"
+    }
+  }
+}

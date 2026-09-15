@@ -1,0 +1,35 @@
+:root {
+  /* 抹茶主色 */
+  --matcha-50: #f2f7f0;
+  --matcha-100: #e3efe0;
+  --matcha-200: #c7dec0;
+  --matcha-300: #a3c794;
+  --matcha-400: #7fad6c;
+  --matcha-500: #5f914e;
+  --matcha-600: #4b743d;
+  --matcha-700: #3d5d33;
+  --matcha-800: #344b2c;
+  --matcha-900: #2c3f26;
+
+  --ink: #1c271a;
+  --ink-soft: #4a5747;
+  --ink-muted: #6e7b6a;
+  /* 实心表面：弹窗/面板不再半透明「毛玻璃」透底 */
+  --surface: #ffffff;
+  --surface-solid: #f7faf5;
+  --line: rgba(61, 93, 51, 0.14);
+  --shadow: 0 10px 40px rgba(44, 63, 38, 0.08);
+
+  --sidebar-width: 232px;
+  --sidebar-collapsed: 72px;
+  --header-height: 60px;
+
+  --el-color-primary: var(--matcha-600);
+  --el-color-primary-light-3: var(--matcha-400);
+  --el-color-primary-light-5: var(--matcha-300);
+  --el-color-primary-light-7: var(--matcha-200);
+  --el-color-primary-light-9: var(--matcha-100);
+  --el-color-primary-dark-2: var(--matcha-700);
+  --el-border-radius-base: 10px;
+  --el-font-family: "Sora", "Noto Sans SC", sans-serif;
+}

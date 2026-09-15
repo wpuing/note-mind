@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: notemind-gateway
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 10000
+        # 大文件解析 / OCR / 向量化可能较长
+        response-timeout: 600s
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns:
+              - "http://127.0.0.1:*"
+              - "http://localhost:*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      default-filters:
+        # 防止客户端伪造内网用户身份头
+        - RemoveRequestHeader=X-User-Id
+        - RemoveRequestHeader=X-User-Name
+        - RemoveRequestHeader=X-User-Role
+      routes:
+        - id: notemind-service
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/api/**
