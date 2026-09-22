@@ -1,0 +1,48 @@
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Local-only tooling / notes / memory
+.tools/
+.cursor/
+AGENTS.md
+key.txt
+platform/logs/
+*.bat
+*.docx
+
+# Build
+**/target/
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/.venv/
+*.pyc
+*.log
+*.jar
+!**/src/**/lib/*.jar
+
+# Uploads / local data
+backend/uploads/**
+!backend/uploads/**/.gitkeep
+platform/notemind-service/uploads/**
+!platform/notemind-service/uploads/**/.gitkeep
+platform/data/
+fixtures/demo-kb/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+id_rsa*
+**/application-local.yml
+
+# Temp / private probes
+docs/_tmp_/
+scripts/_tmp_/
+scripts/_*.py
+docs/file/

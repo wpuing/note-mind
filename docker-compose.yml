@@ -1,0 +1,49 @@
+# 本地依赖：MySQL（业务）+ PostgreSQL/PGVector（向量）+ Redis
+# 若本机已安装 MySQL / PostgreSQL，可只启 redis 或整段跳过
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: notemind-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: notemind
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    volumes:
+      - ./scripts/db/01-mysql-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pchangeme"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: notemind-postgres
+    environment:
+      POSTGRES_DB: notemind_vector
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
+      TZ: Asia/Shanghai
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./scripts/db/02-pgvector-schema.sql:/docker-entrypoint-initdb.d/02-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d notemind_vector"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: notemind-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
