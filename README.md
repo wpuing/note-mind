@@ -2,7 +2,6 @@
 
 **架构方案：Java 主业务 + Python AI 引擎**（四层：数据底座 → 检索 → Agent → 网关接入）  
 详细技术说明书：[docs/architecture/02-enterprise-agentic-rag.md](docs/architecture/02-enterprise-agentic-rag.md)  
-方案补充稿：[docs/castom/01-enterprise-agentic-rag-supplemented.md](docs/castom/01-enterprise-agentic-rag-supplemented.md)  
 参考：[LangChain + LangGraph Agentic RAG](https://www.bilibili.com/opus/1245196454660669448)
 
 ```text
@@ -92,14 +91,13 @@ SSE 流式问答、引用溯源、多轮指代、会话管理、点赞点踩（�
 | 文档 | 说明 |
 | --- | --- |
 | [企业级技术说明书](docs/architecture/02-enterprise-agentic-rag.md) | 四层架构、选型对照、能力成熟度与路线图 |
-| [开工手册：Key / 测试页 / 流程](docs/plan/02-kickoff-bailian-and-test-modules.md) | 百炼 Key、测试模块补强、按日开工 |
 | [架构总览](docs/architecture/01-overview.md) | Java + Python 拓扑与四层映射 |
-| [方案补充稿](docs/castom/01-enterprise-agentic-rag-supplemented.md) | 对原文 docx 的落地改写 |
-| [开发计划](docs/plan/01-development-plan.md) | 分阶段任务、API Key、工具与验收 |
-| [变更记录 · MVP](docs/changelog/01-mvp-stage0-4.md) | 阶段 0～4 已可测能力与验收路径 |
 | [API 规划](docs/api/01-endpoints.md) | 接口前缀 |
 | [RAG 管线](docs/rag/01-pipeline.md) | 检索生成链路 |
 | [本地部署](docs/deploy/01-local.md) | 启动步骤 |
+
+> 开工手册、开发计划、变更记录、方案补充稿等含密钥/流程细节的文档**不随公仓分发**；模型密钥请仅写入本地 `.env`（参见 `.env.example`）。
+
 
 ## 快速启动
 

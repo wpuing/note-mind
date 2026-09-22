@@ -43,6 +43,9 @@ id_rsa*
 
 # Temp / private probes
 docs/_tmp_/
+docs/plan/
+docs/changelog/
+docs/castom/
 scripts/_tmp_/
 scripts/_*.py
 docs/file/
