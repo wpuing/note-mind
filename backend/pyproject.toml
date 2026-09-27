@@ -1,0 +1,9 @@
+[project]
+name = "notemind-backend"
+version = "1.0.0"
+description = "NoteMind Agentic RAG backend"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uvicorn]
+factory = false
